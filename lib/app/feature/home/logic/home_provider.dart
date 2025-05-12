@@ -1,0 +1,107 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:template/app/feature/home/logic/home_state.dart';
+import 'package:template/app/model/home_model.dart';
+import 'package:template/app/alert/safety_check/safety_check_service.dart';
+import 'package:template/app/api/api_service.dart';
+import 'package:template/app/alert/location/location_service.dart';
+
+final homeProvider = NotifierProvider<HomeProvider, HomeState>(
+  HomeProvider.new,
+);
+
+class HomeProvider extends Notifier<HomeState> {
+  @override
+  HomeState build() {
+    return HomeState();
+  }
+
+  Future<void> fetchMode() async {
+    final result = await ApiService.I.getCurrentSafetyStatus();
+
+    result.fold(
+      onSuccess: (data) {
+        final isSafe = (data.mode == 'safe');
+        state = state.copyWith(isActive: isSafe);
+        refreshLocationOnly();
+      },
+      onFailure: (error) {
+        state = state.copyWith(isActive: false);
+      },
+    );
+  }
+
+  Future<void> toggleActive() async {
+    final newActiveState = !state.isActive;
+    final previousState = state;
+
+    state = state.copyWith(isActive: newActiveState);
+
+    final mode = newActiveState ? 'safe' : 'sleeping';
+    final result = await ApiService.I.updateModeStatus(mode: mode);
+
+    result.fold(
+      onSuccess: (_) {
+        if (newActiveState) {
+          SafetyCheckService.I.activate();
+          refreshLocationOnly();
+        } else {
+          SafetyCheckService.I.deactivate();
+        }
+      },
+      onFailure: (error) {
+        state = previousState;
+      },
+    );
+  }
+
+  Future<void> performSafetyCheck() async {
+    try {
+      final position = await LocationService.I.getCurrentLocation();
+      final result = await ApiService.I.dangerInfo(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+
+      result.fold(
+        onSuccess: (data) {
+          state = state.copyWith(
+            safetyChecked: true,
+            location: data.location,
+            safetyLevel: 'Safety Level ${data.safetyLevel}',
+            safetyDescription: data.summary,
+            risks: data.detail
+                .map((e) => HomeModel(
+                      id: e.title.hashCode,
+                      title: e.title,
+                      description: e.content,
+                      level: data.safetyLevel,
+                    ))
+                .toList(),
+          );
+        },
+        onFailure: (e) {
+          //print('[SafetyCheck 실패] ${e.message}');
+        },
+      );
+    } catch (e) {
+      //print('[위치 측정 실패] $e');
+    }
+  }
+
+  Future<void> refreshLocationOnly() async {
+    try {
+      final position = await LocationService.I.getCurrentLocation();
+
+      final result = await ApiService.I.getLocationName(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+      result.fold(
+        onSuccess: (loc) => state = state.copyWith(location: loc),
+        onFailure: (_) => state = state.copyWith(location: 'Unknown'),
+      );
+    } catch (_) {
+      state = state.copyWith(location: 'Location error');
+    }
+  }
+}
