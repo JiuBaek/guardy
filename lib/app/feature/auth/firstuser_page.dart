@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/app/routing/router_service.dart';
+import 'package:guardy/app/routing/router_service.dart';
 
 class FirstUserPage extends StatelessWidget {
   const FirstUserPage({super.key});

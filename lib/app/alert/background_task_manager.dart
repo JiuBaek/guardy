@@ -1,5 +1,5 @@
 import 'package:workmanager/workmanager.dart';
-import 'package:template/app/alert/background_task.dart';
+import 'package:guardy/app/alert/background_task.dart';
 
 class BackgroundTaskManager {
   static const String _taskName = "uniqueLocationTask";

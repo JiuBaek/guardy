@@ -1,4 +1,4 @@
-import 'package:template/app/api/api_error.dart';
+import 'package:guardy/app/api/api_error.dart';
 
 class Result<S> {
   final S? _success;

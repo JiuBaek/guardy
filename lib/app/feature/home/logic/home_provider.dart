@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/home/logic/home_state.dart';
-import 'package:template/app/model/home_model.dart';
-import 'package:template/app/alert/safety_check/safety_check_service.dart';
-import 'package:template/app/api/api_service.dart';
-import 'package:template/app/alert/location/location_service.dart';
+import 'package:guardy/app/feature/home/logic/home_state.dart';
+import 'package:guardy/app/model/home_model.dart';
+import 'package:guardy/app/alert/safety_check/safety_check_service.dart';
+import 'package:guardy/app/api/api_service.dart';
+import 'package:guardy/app/alert/location/location_service.dart';
 
 final homeProvider = NotifierProvider<HomeProvider, HomeState>(
   HomeProvider.new,

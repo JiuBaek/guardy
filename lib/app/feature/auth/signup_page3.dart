@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:template/app/model/signup_request_model.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/auth/auth_service.dart';
+import 'package:guardy/app/model/signup_request_model.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/auth/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SignUpPage3 extends StatefulWidget {

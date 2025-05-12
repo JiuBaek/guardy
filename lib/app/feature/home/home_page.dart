@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/home/logic/home_provider.dart';
-import 'package:template/app/feature/home/logic/home_state.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/auth/auth_state.dart';
+import 'package:guardy/app/feature/home/logic/home_provider.dart';
+import 'package:guardy/app/feature/home/logic/home_state.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/auth/auth_state.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

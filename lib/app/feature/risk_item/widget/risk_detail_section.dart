@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/home/logic/home_provider.dart';
-import 'package:template/app/feature/risk_item/widget/risk_item_widget.dart';
+import 'package:guardy/app/feature/home/logic/home_provider.dart';
+import 'package:guardy/app/feature/risk_item/widget/risk_item_widget.dart';
 
 class RiskDetailSection extends ConsumerWidget {
   const RiskDetailSection({super.key});

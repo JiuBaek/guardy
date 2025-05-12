@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:template/app/api/api_error.dart';
-import 'package:template/app/api/auth_interceptor.dart';
-import 'package:template/app/api/result.dart';
-import 'package:template/app/auth/auth_service.dart';
+import 'package:guardy/app/api/api_error.dart';
+import 'package:guardy/app/api/auth_interceptor.dart';
+import 'package:guardy/app/api/result.dart';
+import 'package:guardy/app/auth/auth_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MyDio {

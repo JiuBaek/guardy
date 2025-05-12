@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/api/api_service.dart';
-import 'package:template/app/model/user_model.dart';
-import 'package:template/app/auth/auth_state.dart';
+import 'package:guardy/app/api/api_service.dart';
+import 'package:guardy/app/model/user_model.dart';
+import 'package:guardy/app/auth/auth_state.dart';
 
 class ProfileUpdateService {
   static Future<void> updateProfile({

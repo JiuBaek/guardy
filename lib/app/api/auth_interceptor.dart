@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:template/app/auth/auth_service.dart';
+import 'package:guardy/app/auth/auth_service.dart';
 
 class AuthInterceptor extends InterceptorsWrapper {
   final AuthService authService;

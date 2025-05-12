@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/settings/logic/settings_provider.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/auth/auth_service.dart';
+import 'package:guardy/app/feature/settings/logic/settings_provider.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/auth/auth_service.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});

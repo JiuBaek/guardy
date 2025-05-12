@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template/app/feature/auth/login_page.dart';
-import 'package:template/app/feature/auth/signup_page1.dart';
-import 'package:template/app/feature/auth/signup_page2.dart';
-import 'package:template/app/feature/auth/signup_page3.dart';
-import 'package:template/app/feature/auth/firstuser_page.dart';
-import 'package:template/app/feature/auth/splash_page.dart';
-import 'package:template/app/feature/error/error_page.dart';
-import 'package:template/app/feature/home/home_page.dart';
-import 'package:template/app/feature/settings/settings_page.dart';
-import 'package:template/app/feature/settings/settings_account_info.dart';
-import 'package:template/app/feature/settings/settings_emergency.dart';
-import 'package:template/app/feature/settings/settings_personal.dart';
-import 'package:template/app/feature/risk_item/risk_item_page.dart';
+import 'package:guardy/app/feature/auth/login_page.dart';
+import 'package:guardy/app/feature/auth/signup_page1.dart';
+import 'package:guardy/app/feature/auth/signup_page2.dart';
+import 'package:guardy/app/feature/auth/signup_page3.dart';
+import 'package:guardy/app/feature/auth/firstuser_page.dart';
+import 'package:guardy/app/feature/auth/splash_page.dart';
+import 'package:guardy/app/feature/error/error_page.dart';
+import 'package:guardy/app/feature/home/home_page.dart';
+import 'package:guardy/app/feature/settings/settings_page.dart';
+import 'package:guardy/app/feature/settings/settings_account_info.dart';
+import 'package:guardy/app/feature/settings/settings_emergency.dart';
+import 'package:guardy/app/feature/settings/settings_personal.dart';
+import 'package:guardy/app/feature/risk_item/risk_item_page.dart';
 
 extension GoRouterX on GoRouter {
   BuildContext? get context => configuration.navigatorKey.currentContext;

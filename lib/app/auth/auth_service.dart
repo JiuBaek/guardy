@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:template/app/api/api_service.dart';
-import 'package:template/app/auth/auth_state.dart';
-import 'package:template/app/model/login_request_model.dart';
-import 'package:template/app/service/secure_storage_service.dart';
-import 'package:template/app/api/result.dart';
-import 'package:template/app/model/signup_request_model.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/model/user_model.dart';
+import 'package:guardy/app/api/api_service.dart';
+import 'package:guardy/app/auth/auth_state.dart';
+import 'package:guardy/app/model/login_request_model.dart';
+import 'package:guardy/app/service/secure_storage_service.dart';
+import 'package:guardy/app/api/result.dart';
+import 'package:guardy/app/model/signup_request_model.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/model/user_model.dart';
 
 class AuthService {
   static AuthService get I => GetIt.I<AuthService>();

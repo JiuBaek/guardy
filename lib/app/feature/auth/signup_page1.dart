@@ -1,6 +1,6 @@
 // signup_page1.dart
 import 'package:flutter/material.dart';
-import 'package:template/app/routing/router_service.dart';
+import 'package:guardy/app/routing/router_service.dart';
 
 class SignUpPage1 extends StatefulWidget {
   const SignUpPage1({super.key});

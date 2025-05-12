@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:template/app/api/api_service.dart';
-import 'package:template/app/alert/safety_check/notification_service.dart';
+import 'package:guardy/app/api/api_service.dart';
+import 'package:guardy/app/alert/safety_check/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String backgroundTaskName = "locationBackgroundTask";

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/auth/auth_service.dart';
-import 'package:template/app/routing/router_service.dart';
+import 'package:guardy/app/auth/auth_service.dart';
+import 'package:guardy/app/routing/router_service.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});

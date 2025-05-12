@@ -1,8 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/alert/safety_check/safety_check_service.dart';
-import 'package:template/app/api/api_service.dart';
-import 'package:template/app/model/risk_item_model.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/alert/safety_check/safety_check_service.dart';
+import 'package:guardy/app/api/api_service.dart';
+import 'package:guardy/app/model/risk_item_model.dart';
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _plugin =

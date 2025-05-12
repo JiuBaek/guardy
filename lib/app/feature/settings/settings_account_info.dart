@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/feature/settings/service/profile_update_service.dart';
-import 'package:template/app/auth/auth_state.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/feature/settings/service/profile_update_service.dart';
+import 'package:guardy/app/auth/auth_state.dart';
 
 class SettingsAccountInfo extends ConsumerStatefulWidget {
   const SettingsAccountInfo({super.key});

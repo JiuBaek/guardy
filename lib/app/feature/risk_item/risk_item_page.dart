@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/home/logic/home_provider.dart';
-import 'package:template/app/feature/risk_item/widget/risk_safety_level_section.dart';
-import 'package:template/app/feature/risk_item/widget/risk_location_section.dart';
-import 'package:template/app/feature/risk_item/widget/risk_detail_section.dart';
-import 'package:template/app/feature/risk_item/widget/risk_footer.dart';
-import 'package:template/app/routing/router_service.dart';
+import 'package:guardy/app/feature/home/logic/home_provider.dart';
+import 'package:guardy/app/feature/risk_item/widget/risk_safety_level_section.dart';
+import 'package:guardy/app/feature/risk_item/widget/risk_location_section.dart';
+import 'package:guardy/app/feature/risk_item/widget/risk_detail_section.dart';
+import 'package:guardy/app/feature/risk_item/widget/risk_footer.dart';
+import 'package:guardy/app/routing/router_service.dart';
 
 class RiskItemPage extends ConsumerWidget {
   const RiskItemPage({super.key});

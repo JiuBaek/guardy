@@ -9,13 +9,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:get_it/get_it.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:template/app/api/api_service.dart';
-import 'package:template/app/auth/auth_service.dart';
-import 'package:template/app/routing/router_service.dart';
-import 'package:template/app/service/secure_storage_service.dart';
-import 'package:template/app/alert/background_task.dart';
-import 'package:template/app/alert/safety_check/notification_service.dart';
-import 'package:template/app/alert/safety_check/safety_check_service.dart';
+import 'package:guardy/app/api/api_service.dart';
+import 'package:guardy/app/auth/auth_service.dart';
+import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/service/secure_storage_service.dart';
+import 'package:guardy/app/alert/background_task.dart';
+import 'package:guardy/app/alert/safety_check/notification_service.dart';
+import 'package:guardy/app/alert/safety_check/safety_check_service.dart';
 
 part 'service.dart';
 

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template/app/model/user_model.dart';
+import 'package:guardy/app/model/user_model.dart';
 
 part 'settings_state.freezed.dart';
 part 'settings_state.g.dart';

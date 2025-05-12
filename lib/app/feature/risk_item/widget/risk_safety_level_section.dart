@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/home/logic/home_provider.dart';
+import 'package:guardy/app/feature/home/logic/home_provider.dart';
 
 class RiskSafetyLevelSection extends ConsumerWidget {
   final int level;

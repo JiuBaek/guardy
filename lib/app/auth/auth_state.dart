@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template/app/model/user_model.dart';
+import 'package:guardy/app/model/user_model.dart';
 
 part 'auth_state.freezed.dart';
 part 'auth_state.g.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:template/app/feature/settings/logic/settings_state.dart';
-import 'package:template/app/model/user_model.dart';
+import 'package:guardy/app/feature/settings/logic/settings_state.dart';
+import 'package:guardy/app/model/user_model.dart';
 
 final settingsProvider = NotifierProvider<SettingsProvider, SettingsState>(
   SettingsProvider.new,

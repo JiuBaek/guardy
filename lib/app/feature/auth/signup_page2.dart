@@ -1,6 +1,6 @@
 // signup_page2.dart
 import 'package:flutter/material.dart';
-import 'package:template/app/routing/router_service.dart';
+import 'package:guardy/app/routing/router_service.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpPage2 extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/app/alert/safety_check/safety_check_state.dart';
-import 'package:template/app/alert/safety_check/notification_service.dart';
+import 'package:guardy/app/alert/safety_check/safety_check_state.dart';
+import 'package:guardy/app/alert/safety_check/notification_service.dart';
 //import 'package:template/app/api/api_service.dart';
 
 class SafetyCheckService {
