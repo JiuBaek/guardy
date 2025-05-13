@@ -35,9 +35,10 @@ class _OwlDancePlayerState extends State<OwlDancePlayer> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: const Text(
-                  "Hoo hoo, I'm using Gemini to search!",
+                  "⚠️ This can take more than a minute, please wait.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF838383),
@@ -46,7 +47,7 @@ class _OwlDancePlayerState extends State<OwlDancePlayer> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8), // 텍스트와 영상 사이 간격
+              const SizedBox(height: 8),
               SizedBox(
                 width: 180,
                 height: 120,

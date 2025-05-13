@@ -249,14 +249,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ? const OwlDancePlayer()
                   : OutlinedButton(
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                                '⚠️ This can take more than a minute, please wait.'),
-                            duration: Duration(seconds: 5),
-                          ),
-                        );
-                        notifier.performSafetyCheck(); // 이 안에서 loading 처리
+                        notifier.performSafetyCheck();
                       },
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
