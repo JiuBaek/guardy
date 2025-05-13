@@ -55,7 +55,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
   ];
 
   final List<String> birthYears = [
-    for (int year = 1980; year <= 2010; year++) year.toString()
+    for (int year = 1925; year <= 2020; year++) year.toString()
   ];
   final List<String> languages = ['Korean', 'English'];
   final List<String> genders = ['Male', 'Female'];
