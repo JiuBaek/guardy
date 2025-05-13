@@ -15,7 +15,45 @@ class _SignUpPage2State extends State<SignUpPage2> {
   final _phoneController = TextEditingController();
   final _difficultiesController = TextEditingController();
 
-  final List<String> nationalities = ['Korea', 'Japan', 'China'];
+  final List<String> nationalities = [
+    'Australia',
+    'Bangladesh',
+    'Brunei',
+    'Cambodia',
+    'China',
+    'Fiji',
+    'Hong Kong',
+    'India',
+    'Indonesia',
+    'Japan',
+    'Kiribati',
+    'Laos',
+    'Macau',
+    'Malaysia',
+    'Marshall Islands',
+    'Micronesia',
+    'Mongolia',
+    'Myanmar',
+    'Nauru',
+    'Nepal',
+    'New Zealand',
+    'Pakistan',
+    'Palau',
+    'Papua New Guinea',
+    'Philippines',
+    'Samoa',
+    'Singapore',
+    'Solomon Islands',
+    'South Korea',
+    'Sri Lanka',
+    'Taiwan',
+    'Thailand',
+    'Tonga',
+    'Tuvalu',
+    'Vanuatu',
+    'Vietnam',
+  ];
+
   final List<String> birthYears = [
     for (int year = 1980; year <= 2010; year++) year.toString()
   ];
@@ -186,14 +224,48 @@ class _SignUpPage2State extends State<SignUpPage2> {
   }
 
   Widget _buildPhoneInput() {
-    final List<String> countries = ['+82', '+81', '+86'];
+    final List<String> countries = [
+      '+61',
+      '+880',
+      '+673',
+      '+855',
+      '+86',
+      '+679',
+      '+852',
+      '+91',
+      '+62',
+      '+81',
+      '+686',
+      '+856',
+      '+853',
+      '+60',
+      '+692',
+      '+691',
+      '+976',
+      '+95',
+      '+674',
+      '+977',
+      '+64',
+      '+92',
+      '+680',
+      '+675',
+      '+63',
+      '+685',
+      '+65',
+      '+677',
+      '+82',
+      '+94',
+      '+886',
+      '+66',
+      '+676'
+    ];
     return Container(
       height: 50,
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFF838383)),
         borderRadius: BorderRadius.circular(30),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           DropdownButtonHideUnderline(

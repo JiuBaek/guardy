@@ -162,14 +162,49 @@ class _SignUpPage3State extends State<SignUpPage3> {
   }
 
   Widget _buildPhoneInput() {
-    final List<String> countries = ['+82', '+81', '+86'];
+    final List<String> countries = [
+      '+61',
+      '+880',
+      '+673',
+      '+855',
+      '+86',
+      '+679',
+      '+852',
+      '+91',
+      '+62',
+      '+81',
+      '+686',
+      '+856',
+      '+853',
+      '+60',
+      '+692',
+      '+691',
+      '+976',
+      '+95',
+      '+674',
+      '+977',
+      '+64',
+      '+92',
+      '+680',
+      '+675',
+      '+63',
+      '+685',
+      '+65',
+      '+677',
+      '+82',
+      '+94',
+      '+886',
+      '+66',
+      '+676'
+    ];
+
     return Container(
       height: 50,
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFF838383)),
         borderRadius: BorderRadius.circular(30),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           DropdownButtonHideUnderline(

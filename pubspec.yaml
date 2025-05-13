@@ -28,6 +28,7 @@ dependencies:
   shared_preferences: ^2.5.3
   firebase_core: ^3.13.0
   firebase_messaging: ^15.2.5
+  video_player: ^2.9.5
 
   
 
@@ -48,4 +49,4 @@ flutter:
   assets:
     - .env
     - assets/images/
-    - assets/owlDance.gif
+    - assets/owlDance.mp4

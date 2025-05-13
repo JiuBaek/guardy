@@ -4,6 +4,7 @@ import 'package:guardy/app/feature/home/logic/home_provider.dart';
 import 'package:guardy/app/feature/home/logic/home_state.dart';
 import 'package:guardy/app/routing/router_service.dart';
 import 'package:guardy/app/auth/auth_state.dart';
+import 'package:guardy/app/feature/home/widget/owl_dance_player.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -13,6 +14,8 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  bool showOwl = true;
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +28,18 @@ class _HomePageState extends ConsumerState<HomePage> {
     final notifier = ref.watch(homeProvider.notifier);
     final authState = ref.read(authStateProvider);
     final String nickname = authState.user?.nickname ?? 'User';
+
+    if (state.isActive && showOwl) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(seconds: 1), () {
+          if (mounted) {
+            setState(() {
+              showOwl = false;
+            });
+          }
+        });
+      });
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -82,17 +97,40 @@ class _HomePageState extends ConsumerState<HomePage> {
             const SizedBox(height: 24),
             _buildActiveButton(notifier, state.isActive),
             const SizedBox(height: 16),
-            Image.asset(
-              state.isActive
-                  ? 'assets/images/blue_owl_active.png'
-                  : 'assets/images/blue_owl_inactive.png',
-              width: 50,
-              height: 58,
-              fit: BoxFit.contain,
+            AnimatedSize(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+              child: Column(
+                children: [
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: showOwl
+                        ? Image.asset(
+                            state.isActive
+                                ? 'assets/images/blue_owl_active.png'
+                                : 'assets/images/blue_owl_inactive.png',
+                            key: const ValueKey('owl'),
+                            width: 50,
+                            height: 58,
+                            fit: BoxFit.contain,
+                          )
+                        : const SizedBox.shrink(key: ValueKey('empty')),
+                  ),
+                  SizedBox(height: showOwl ? 18 : 0),
+                ],
+              ),
             ),
-            const SizedBox(height: 24),
             Expanded(
-              child: _buildBottomCard(state, notifier),
+              child: AnimatedSlide(
+                offset: !showOwl ? Offset.zero : const Offset(0, 0.05),
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeOut,
+                child: AnimatedOpacity(
+                  opacity: 1.0,
+                  duration: const Duration(milliseconds: 300),
+                  child: _buildBottomCard(state, notifier),
+                ),
+              ),
             ),
             const SizedBox(
               height: 60,
@@ -105,8 +143,24 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   Widget _buildActiveButton(HomeProvider notifier, bool isActive) {
     return TextButton(
-      onPressed: () {
+      onPressed: () async {
         notifier.toggleActive();
+
+        final nowActive = ref.read(homeProvider).isActive;
+
+        if (!nowActive) {
+          setState(() {
+            showOwl = true;
+          });
+          return;
+        }
+
+        await Future.delayed(const Duration(seconds: 1));
+        if (mounted) {
+          setState(() {
+            showOwl = false;
+          });
+        }
       },
       style: TextButton.styleFrom(
         backgroundColor: isActive ? const Color(0xFF005DD8) : Colors.white,
@@ -192,17 +246,13 @@ class _HomePageState extends ConsumerState<HomePage> {
           Expanded(
             child: Center(
               child: state.isLoading
-                  ? Image.asset(
-                      'assets/owlDance.gif',
-                      width: 150,
-                      height: 150,
-                    )
+                  ? const OwlDancePlayer()
                   : OutlinedButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                                '⚠️ This can take more than a minute, please wait.'),
+                                '⚠️ This can take more than a minute, please wait. ⚠️'),
                             duration: Duration(seconds: 5),
                           ),
                         );
@@ -258,35 +308,45 @@ class _HomePageState extends ConsumerState<HomePage> {
                 endIndent: 5,
                 height: 32,
               ),
-              if (state.safetyLevel != null)
-                Text(
-                  state.safetyLevel!,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF005DD8),
-                    fontSize: 16,
+              const SizedBox(
+                height: 24,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (state.safetyLevel != null)
+                    Text(
+                      state.safetyLevel!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF005DD8),
+                        fontSize: 17,
+                      ),
+                    ),
+                  const SizedBox(height: 8),
+                  if (state.safetyDescription != null)
+                    Text(
+                      state.safetyDescription!,
+                      style:
+                          const TextStyle(fontSize: 14, color: Colors.black87),
+                      textAlign: TextAlign.center,
+                    ),
+                  const SizedBox(height: 16),
+                  GestureDetector(
+                    onTap: () {
+                      RouterService.I.router.push(Routes.riskItem);
+                    },
+                    child: const Text(
+                      'Tap for details',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.underline,
+                        color: Color(0xFF005DD8),
+                      ),
+                    ),
                   ),
-                ),
-              const SizedBox(height: 8),
-              if (state.safetyDescription != null)
-                Text(
-                  state.safetyDescription!,
-                  style: const TextStyle(fontSize: 14, color: Colors.black87),
-                ),
-              const SizedBox(height: 16),
-              GestureDetector(
-                onTap: () {
-                  RouterService.I.router.push(Routes.riskItem);
-                },
-                child: const Text(
-                  'Tap for details',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.underline,
-                    color: Color(0xFF005DD8),
-                  ),
-                ),
+                ],
               ),
             ],
           ),

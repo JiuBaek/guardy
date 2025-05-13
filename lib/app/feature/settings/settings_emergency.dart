@@ -21,7 +21,41 @@ class _SettingsEmergencyContactsState
       TextEditingController();
 
   String selectedCountryCode = '';
-  final List<String> countries = ['+82', '+81', '+86'];
+  final List<String> countries = [
+    '+61',
+    '+880',
+    '+673',
+    '+855',
+    '+86',
+    '+679',
+    '+852',
+    '+91',
+    '+62',
+    '+81',
+    '+686',
+    '+856',
+    '+853',
+    '+60',
+    '+692',
+    '+691',
+    '+976',
+    '+95',
+    '+674',
+    '+977',
+    '+64',
+    '+92',
+    '+680',
+    '+675',
+    '+63',
+    '+685',
+    '+65',
+    '+677',
+    '+82',
+    '+94',
+    '+886',
+    '+66',
+    '+676'
+  ];
 
   @override
   void initState() {
@@ -172,7 +206,7 @@ class _SettingsEmergencyContactsState
         border: Border.all(color: const Color(0xFF838383)),
         borderRadius: BorderRadius.circular(30),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           isEditMode

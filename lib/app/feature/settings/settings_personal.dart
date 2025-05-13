@@ -24,8 +24,80 @@ class _SettingsPersonalState extends ConsumerState<SettingsPersonal> {
   final TextEditingController diseaseController = TextEditingController();
 
   // Dropdown options
-  final List<String> countries = ['+82', '+81', '+86'];
-  final List<String> nationalities = ['Korea', 'Japan', 'China'];
+  final List<String> countries = [
+    '+61',
+    '+880',
+    '+673',
+    '+855',
+    '+86',
+    '+679',
+    '+852',
+    '+91',
+    '+62',
+    '+81',
+    '+686',
+    '+856',
+    '+853',
+    '+60',
+    '+692',
+    '+691',
+    '+976',
+    '+95',
+    '+674',
+    '+977',
+    '+64',
+    '+92',
+    '+680',
+    '+675',
+    '+63',
+    '+685',
+    '+65',
+    '+677',
+    '+82',
+    '+94',
+    '+886',
+    '+66',
+    '+676'
+  ];
+  final List<String> nationalities = [
+    'Australia',
+    'Bangladesh',
+    'Brunei',
+    'Cambodia',
+    'China',
+    'Fiji',
+    'Hong Kong',
+    'India',
+    'Indonesia',
+    'Japan',
+    'Kiribati',
+    'Laos',
+    'Macau',
+    'Malaysia',
+    'Marshall Islands',
+    'Micronesia',
+    'Mongolia',
+    'Myanmar',
+    'Nauru',
+    'Nepal',
+    'New Zealand',
+    'Pakistan',
+    'Palau',
+    'Papua New Guinea',
+    'Philippines',
+    'Samoa',
+    'Singapore',
+    'Solomon Islands',
+    'South Korea',
+    'Sri Lanka',
+    'Taiwan',
+    'Thailand',
+    'Tonga',
+    'Tuvalu',
+    'Vanuatu',
+    'Vietnam',
+  ];
+
   final List<String> birthYears = [
     for (int year = 1925; year <= 2020; year++) year.toString()
   ];
@@ -192,7 +264,7 @@ class _SettingsPersonalState extends ConsumerState<SettingsPersonal> {
         border: Border.all(color: const Color(0xFF838383)),
         borderRadius: BorderRadius.circular(30),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           isEditMode
@@ -229,7 +301,7 @@ class _SettingsPersonalState extends ConsumerState<SettingsPersonal> {
                 disabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               ),
             ),
           ),
