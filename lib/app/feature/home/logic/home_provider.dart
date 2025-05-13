@@ -54,8 +54,13 @@ class HomeProvider extends Notifier<HomeState> {
     );
   }
 
+  void setLoading(bool value) {
+    state = state.copyWith(isLoading: value);
+  }
+
   Future<void> performSafetyCheck() async {
     try {
+      setLoading(true);
       final position = await LocationService.I.getCurrentLocation();
       final result = await ApiService.I.dangerInfo(
         latitude: position.latitude,
@@ -86,6 +91,7 @@ class HomeProvider extends Notifier<HomeState> {
     } catch (e) {
       //print('[위치 측정 실패] $e');
     }
+    setLoading(false);
   }
 
   Future<void> refreshLocationOnly() async {

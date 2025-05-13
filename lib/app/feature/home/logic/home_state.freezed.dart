@@ -22,6 +22,7 @@ HomeState _$HomeStateFromJson(Map<String, dynamic> json) {
 mixin _$HomeState {
   bool get isActive => throw _privateConstructorUsedError;
   bool get safetyChecked => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String? get safetyLevel => throw _privateConstructorUsedError;
   String? get safetyDescription => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $HomeStateCopyWith<$Res> {
   $Res call(
       {bool isActive,
       bool safetyChecked,
+      bool isLoading,
       String location,
       String? safetyLevel,
       String? safetyDescription,
@@ -68,6 +70,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $Res call({
     Object? isActive = null,
     Object? safetyChecked = null,
+    Object? isLoading = null,
     Object? location = null,
     Object? safetyLevel = freezed,
     Object? safetyDescription = freezed,
@@ -81,6 +84,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       safetyChecked: null == safetyChecked
           ? _value.safetyChecked
           : safetyChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       location: null == location
           ? _value.location
@@ -113,6 +120,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   $Res call(
       {bool isActive,
       bool safetyChecked,
+      bool isLoading,
       String location,
       String? safetyLevel,
       String? safetyDescription,
@@ -134,6 +142,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isActive = null,
     Object? safetyChecked = null,
+    Object? isLoading = null,
     Object? location = null,
     Object? safetyLevel = freezed,
     Object? safetyDescription = freezed,
@@ -147,6 +156,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       safetyChecked: null == safetyChecked
           ? _value.safetyChecked
           : safetyChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       location: null == location
           ? _value.location
@@ -174,6 +187,7 @@ class _$HomeStateImpl implements _HomeState {
   _$HomeStateImpl(
       {this.isActive = false,
       this.safetyChecked = false,
+      this.isLoading = false,
       this.location = 'Unknown Place, Please wait a second',
       this.safetyLevel,
       this.safetyDescription,
@@ -189,6 +203,9 @@ class _$HomeStateImpl implements _HomeState {
   @override
   @JsonKey()
   final bool safetyChecked;
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   @JsonKey()
   final String location;
@@ -207,7 +224,7 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(isActive: $isActive, safetyChecked: $safetyChecked, location: $location, safetyLevel: $safetyLevel, safetyDescription: $safetyDescription, risks: $risks)';
+    return 'HomeState(isActive: $isActive, safetyChecked: $safetyChecked, isLoading: $isLoading, location: $location, safetyLevel: $safetyLevel, safetyDescription: $safetyDescription, risks: $risks)';
   }
 
   @override
@@ -219,6 +236,8 @@ class _$HomeStateImpl implements _HomeState {
                 other.isActive == isActive) &&
             (identical(other.safetyChecked, safetyChecked) ||
                 other.safetyChecked == safetyChecked) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.safetyLevel, safetyLevel) ||
@@ -234,6 +253,7 @@ class _$HomeStateImpl implements _HomeState {
       runtimeType,
       isActive,
       safetyChecked,
+      isLoading,
       location,
       safetyLevel,
       safetyDescription,
@@ -259,6 +279,7 @@ abstract class _HomeState implements HomeState {
   factory _HomeState(
       {final bool isActive,
       final bool safetyChecked,
+      final bool isLoading,
       final String location,
       final String? safetyLevel,
       final String? safetyDescription,
@@ -271,6 +292,8 @@ abstract class _HomeState implements HomeState {
   bool get isActive;
   @override
   bool get safetyChecked;
+  @override
+  bool get isLoading;
   @override
   String get location;
   @override

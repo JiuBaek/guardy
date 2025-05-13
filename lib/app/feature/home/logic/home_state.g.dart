@@ -10,6 +10,7 @@ _$HomeStateImpl _$$HomeStateImplFromJson(Map<String, dynamic> json) =>
     _$HomeStateImpl(
       isActive: json['isActive'] as bool? ?? false,
       safetyChecked: json['safetyChecked'] as bool? ?? false,
+      isLoading: json['isLoading'] as bool? ?? false,
       location:
           json['location'] as String? ?? 'Unknown Place, Please wait a second',
       safetyLevel: json['safetyLevel'] as String?,
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$HomeStateImplToJson(_$HomeStateImpl instance) =>
     <String, dynamic>{
       'isActive': instance.isActive,
       'safetyChecked': instance.safetyChecked,
+      'isLoading': instance.isLoading,
       'location': instance.location,
       'safetyLevel': instance.safetyLevel,
       'safetyDescription': instance.safetyDescription,

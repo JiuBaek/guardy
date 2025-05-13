@@ -9,6 +9,7 @@ class HomeState with _$HomeState {
   factory HomeState({
     @Default(false) bool isActive,
     @Default(false) bool safetyChecked,
+    @Default(false) bool isLoading,
     @Default('Unknown Place, Please wait a second') String location,
     String? safetyLevel,
     String? safetyDescription,

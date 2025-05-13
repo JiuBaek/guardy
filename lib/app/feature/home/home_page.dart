@@ -191,25 +191,31 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           Expanded(
             child: Center(
-              child: OutlinedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                          '⚠️ This can take more than a minute, please wait.'),
-                      duration: Duration(seconds: 5),
+              child: state.isLoading
+                  ? Image.asset(
+                      'assets/owlDance.gif',
+                      width: 150,
+                      height: 150,
+                    )
+                  : OutlinedButton(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                                '⚠️ This can take more than a minute, please wait.'),
+                            duration: Duration(seconds: 5),
+                          ),
+                        );
+                        notifier.performSafetyCheck(); // 이 안에서 loading 처리
+                      },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        side: const BorderSide(color: Color(0xFF005DD8)),
+                      ),
+                      child: const Text('Safety Check'),
                     ),
-                  );
-                  notifier.performSafetyCheck();
-                },
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  side: const BorderSide(color: Color(0xFF005DD8)),
-                ),
-                child: const Text('Safety Check'),
-              ),
             ),
           ),
         ],
