@@ -252,7 +252,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                                '⚠️ This can take more than a minute, please wait. ⚠️'),
+                                '⚠️ This can take more than a minute, please wait.'),
                             duration: Duration(seconds: 5),
                           ),
                         );
