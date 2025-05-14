@@ -109,16 +109,9 @@ extension SafetyApiService on ApiService {
   Future<Result<void>> safetyCheckin() {
     return _dio.post(
       '/safety/checkin',
-      fromJson: (_) {},
+      fromJson: SignupResponseModel.fromJson,
     );
   }
-
-  // Future<Result<void>> triggerFinalEmergencyAlert() {
-  //   return _dio.post(
-  //     '/safety/emergency', // 예시용, 실제 서버 URI 확인 필요
-  //     fromJson: (_) {},
-  //   );
-  //}
 }
 
 //settings patch
@@ -150,7 +143,7 @@ extension UserProfileApiService on ApiService {
         'emContactName': emContactName,
         'emContactNumber': emContactNumber,
       },
-      fromJson: (_) {},
+      fromJson: SignupResponseModel.fromJson,
     );
   }
 }
@@ -169,7 +162,7 @@ extension LocationApiService on ApiService {
         'longitude': longitude,
         'lastUpdatedAt': lastUpdatedAt.toIso8601String(),
       },
-      fromJson: (_) {},
+      fromJson: SignupResponseModel.fromJson,
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:workmanager/workmanager.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:guardy/app/api/api_service.dart';
@@ -9,7 +10,7 @@ const String backgroundTaskName = "locationBackgroundTask";
 
 double? lastLatitude;
 double? lastLongitude;
-const double distanceThresholdInMeters = 1000.0; // 1km
+const double distanceThresholdInMeters = 10.0; //TODO: 1000.0으으로 고치기
 
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
@@ -31,7 +32,6 @@ void callbackDispatcher() {
       final currentLatitude = position.latitude;
       final currentLongitude = position.longitude;
 
-      //current location for emergency SMS
       await ApiService.I.sendCurrentLocation(
         latitude: currentLatitude,
         longitude: currentLongitude,
@@ -69,8 +69,15 @@ void callbackDispatcher() {
           await NotificationService.showDangerNotification(
               location: riskItem.location,
               safetyLevel: riskItem.safetyLevel,
-              details: riskItem.detail,
               summary: riskItem.summary);
+
+          final riskListJson =
+              jsonEncode(riskItem.detail.map((e) => e.toJson()).toList());
+
+          await prefs.setString('risk_location', riskItem.location);
+          await prefs.setInt('risk_level', riskItem.safetyLevel);
+          await prefs.setString('risk_risks', riskListJson);
+          await prefs.setString('risk_summary', riskItem.summary);
         },
         onFailure: (error) {
           debugPrint('[BackgroundTask] 위험정보 가져오기 실패: ${error.message}');

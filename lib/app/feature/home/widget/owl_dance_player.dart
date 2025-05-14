@@ -49,7 +49,7 @@ class _OwlDancePlayerState extends State<OwlDancePlayer> {
               ),
               const SizedBox(height: 8),
               SizedBox(
-                width: 180,
+                width: 190,
                 height: 120,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),

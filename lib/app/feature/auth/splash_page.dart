@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:guardy/app/auth/auth_service.dart';
 import 'package:guardy/app/routing/router_service.dart';
+import 'package:guardy/app/alert/safety_check/notification_service.dart';
+import 'package:guardy/app/feature/home/logic/home_provider.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -20,13 +23,32 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   Future<void> _init() async {
     await Future.delayed(const Duration(seconds: 2));
     final bool success = await AuthService.I.tryAutoLogin();
-    debugPrint('아니 그래서서 성공 했냐고 $success');
+
+    await _handleDangerNotificationLaunch();
 
     if (success) {
       RouterService.I.router.go(Routes.home);
     } else {
       RouterService.I.router.go(Routes.firstuser);
     }
+  }
+
+  Future<bool> _handleDangerNotificationLaunch() async {
+    final launchDetails =
+        await NotificationService.plugin.getNotificationAppLaunchDetails();
+
+    final isDangerNotiLaunch =
+        launchDetails?.didNotificationLaunchApp == true &&
+            launchDetails?.notificationResponse?.payload == 'danger';
+
+    if (!isDangerNotiLaunch) return false;
+
+    final prefs = await SharedPreferences.getInstance();
+
+    ref.read(homeProvider.notifier).updateRiskInfoFromPrefs(prefs);
+    RouterService.I.router.go(Routes.riskItem);
+
+    return true;
   }
 
   @override

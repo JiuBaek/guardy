@@ -21,7 +21,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Provider나 context 접근은 여기에!
       ref.read(homeProvider.notifier).fetchMode();
       ref.watch(homeProvider.notifier).requestNotificationPermission();
       Service.setupFirebaseMessagingHandlers();

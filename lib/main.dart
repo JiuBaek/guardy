@@ -16,16 +16,33 @@ import 'package:guardy/app/routing/router_service.dart';
 import 'package:guardy/app/service/secure_storage_service.dart';
 import 'package:guardy/app/alert/background_task.dart';
 import 'package:guardy/app/alert/safety_check/notification_service.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 part 'service.dart';
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse response) {
+  print(response.actionId);
+  print(response.id);
+  print(response.input);
+  print(response.payload);
+}
 
 void main() async {
   //오류 감지
   runZonedGuarded<Future<void>>(
     () async {
       await Service.initFlutter();
+
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      await NotificationService.init();
+
       debugPrint('2 - Flutter initialized');
+
       await Service.initEnv();
+
       debugPrint('2.5 - Flutter initialized');
 
       final serviceProviderContainer = Service.registerServices();
@@ -33,20 +50,16 @@ void main() async {
 
       await NotificationService.init();
 
+      Service.setupFirebaseMessagingHandlers();
+      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+      await NotificationService.requestNotificationPermission();
+
       debugPrint('4 - Services initialized');
       await Workmanager().initialize(
         callbackDispatcher,
         isInDebugMode: true,
       );
       debugPrint('5 - Workmanager initialized');
-
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-      Service.setupFirebaseMessagingHandlers();
-      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-      debugPrint('6 - firebase initialized');
 
       final router = RouterService.I.router;
 

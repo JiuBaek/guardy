@@ -43,26 +43,21 @@ class Service {
     _fcmHandlersInitialized = true;
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      final notification = message.notification;
-      if (notification != null) {
-        NotificationService.showFirebaseNotification(
-          notification.title,
-          notification.body,
-        );
+      print('📨 FCM 수신됨: ${message.notification?.title}');
+      final title = message.notification?.title ?? message.data['title'];
+      final body = message.notification?.body ?? message.data['body'];
+      if (title != null && body != null) {
+        NotificationService.showFirebaseNotification(title, body);
       }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      RouterService.I.router.go(Routes.riskItem);
     });
   }
 }
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('📦 [BG] Push received: ${message.messageId}');
   // TODO: 알림 클릭 시 동작 또는 백그라운드 로직
 }
+
 /* main() 시작
 
 runZonedGuarded 안에서 실행 (오류 감지용)

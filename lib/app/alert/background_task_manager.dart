@@ -11,7 +11,6 @@ class BackgroundTaskManager {
     );
   }
 
-  // 위치 추적 시작 (로그인 성공 직후)
   static Future<void> startLocationTracking() async {
     await Workmanager().registerPeriodicTask(
       _taskName,
@@ -23,7 +22,7 @@ class BackgroundTaskManager {
       ),
     );
   }
-  
+
   static Future<void> stopLocationTracking() async {
     await Workmanager().cancelByUniqueName(_taskName);
   }
