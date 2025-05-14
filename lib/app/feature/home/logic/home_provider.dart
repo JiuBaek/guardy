@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:guardy/app/feature/home/logic/home_state.dart';
 import 'package:guardy/app/model/home_model.dart';
-import 'package:guardy/app/alert/safety_check/safety_check_service.dart';
 import 'package:guardy/app/api/api_service.dart';
 import 'package:guardy/app/alert/location/location_service.dart';
 
@@ -13,6 +13,12 @@ class HomeProvider extends Notifier<HomeState> {
   @override
   HomeState build() {
     return HomeState();
+  }
+
+  Future<void> requestNotificationPermission() async {
+    final messaging = FirebaseMessaging.instance;
+
+    await messaging.requestPermission(alert: true, badge: true, sound: true);
   }
 
   Future<void> fetchMode() async {
@@ -42,10 +48,7 @@ class HomeProvider extends Notifier<HomeState> {
     result.fold(
       onSuccess: (_) {
         if (newActiveState) {
-          SafetyCheckService.I.activate();
           refreshLocationOnly();
-        } else {
-          SafetyCheckService.I.deactivate();
         }
       },
       onFailure: (error) {

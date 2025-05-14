@@ -56,8 +56,6 @@ void callbackDispatcher() {
         }
       }
 
-      //여기까지 왔으면 1km 넘게 이동한 것
-
       final result = await ApiService.I.dangerInfo(
         latitude: currentLatitude,
         longitude: currentLongitude,

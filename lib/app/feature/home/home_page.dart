@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guardy/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guardy/app/feature/home/logic/home_provider.dart';
 import 'package:guardy/app/feature/home/logic/home_state.dart';
@@ -19,7 +20,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-    ref.read(homeProvider.notifier).fetchMode();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Provider나 context 접근은 여기에!
+      ref.read(homeProvider.notifier).fetchMode();
+      ref.watch(homeProvider.notifier).requestNotificationPermission();
+      Service.setupFirebaseMessagingHandlers();
+    });
   }
 
   @override

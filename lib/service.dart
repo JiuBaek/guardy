@@ -1,6 +1,8 @@
 part of 'main.dart';
 
 class Service {
+  static bool _fcmHandlersInitialized = false;
+
   static Future<void> initFlutter() async {
     WidgetsFlutterBinding.ensureInitialized();
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -35,6 +37,31 @@ class Service {
     GetIt.I.registerSingleton(RouterService()..init());
     return container;
   }
+
+  static void setupFirebaseMessagingHandlers() {
+    if (_fcmHandlersInitialized) return;
+    _fcmHandlersInitialized = true;
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      final notification = message.notification;
+      if (notification != null) {
+        NotificationService.showFirebaseNotification(
+          notification.title,
+          notification.body,
+        );
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      RouterService.I.router.go(Routes.riskItem);
+    });
+  }
+}
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('📦 [BG] Push received: ${message.messageId}');
+  // TODO: 알림 클릭 시 동작 또는 백그라운드 로직
 }
 /* main() 시작
 

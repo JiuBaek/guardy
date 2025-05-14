@@ -23,8 +23,7 @@ class BackgroundTaskManager {
       ),
     );
   }
-
-  /// 위치 추적 중단 (로그아웃 등에서)
+  
   static Future<void> stopLocationTracking() async {
     await Workmanager().cancelByUniqueName(_taskName);
   }
