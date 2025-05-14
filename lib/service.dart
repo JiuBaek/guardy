@@ -43,7 +43,6 @@ class Service {
     _fcmHandlersInitialized = true;
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('📨 FCM 수신됨: ${message.notification?.title}');
       final title = message.notification?.title ?? message.data['title'];
       final body = message.notification?.body ?? message.data['body'];
       if (title != null && body != null) {
@@ -55,23 +54,4 @@ class Service {
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  // TODO: 알림 클릭 시 동작 또는 백그라운드 로직
 }
-
-/* main() 시작
-
-runZonedGuarded 안에서 실행 (오류 감지용)
-
-Service.initFlutter() → Flutter 준비 + 화면 세로 고정
-
-Service.initEnv() → .env 파일 로드
-
-registerServices() → 모든 서비스 등록
-
-RouterService.I.router 가져오기
-
-runApp() → 앱 실행
-
-앱은 MaterialApp.router(...)를 사용해 화면을 렌더링하고, 등록된 라우터 및 상태를 통해 작동
-
-*/

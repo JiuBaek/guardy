@@ -6,6 +6,7 @@ import 'package:guardy/app/feature/home/logic/home_state.dart';
 import 'package:guardy/app/routing/router_service.dart';
 import 'package:guardy/app/auth/auth_state.dart';
 import 'package:guardy/app/feature/home/widget/owl_dance_player.dart';
+import 'package:guardy/app/api/api_service.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -20,6 +21,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(homeProvider.notifier).fetchMode();
       ref.watch(homeProvider.notifier).requestNotificationPermission();
@@ -52,7 +54,22 @@ class _HomePageState extends ConsumerState<HomePage> {
           backgroundColor: Colors.white,
           centerTitle: true,
           elevation: 0,
-          leading: const SizedBox.shrink(),
+          leading: IconButton(
+              onPressed: () async {
+                await ApiService.I.safetyCheckin();
+                if (!mounted) return;
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      backgroundColor: Color(0xFF005DD8),
+                      content: Text(
+                        ' ✓ safety check finish',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      duration: Duration(seconds: 1, milliseconds: 500)),
+                );
+              },
+              icon: const Icon(Icons.check)),
           actions: [
             IconButton(
               onPressed: () {
@@ -254,6 +271,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ? const OwlDancePlayer()
                   : OutlinedButton(
                       onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              backgroundColor: Color(0xFF005DD8),
+                              content: Text(
+                                ' ⚠️ This can take more than a minute, please wait.',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              duration:
+                                  Duration(seconds: 1, milliseconds: 500)),
+                        );
                         notifier.performSafetyCheck();
                       },
                       style: OutlinedButton.styleFrom(

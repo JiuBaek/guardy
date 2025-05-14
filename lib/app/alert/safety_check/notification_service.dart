@@ -1,10 +1,9 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:guardy/app/routing/router_service.dart';
 import 'package:guardy/app/api/api_service.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:guardy/main.dart';
 
 class NotificationService {
+  static String? lastPayload;
   static final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
@@ -41,20 +40,13 @@ class NotificationService {
     await _plugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: _handleNotificationClick,
-      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
   }
 
   static void _handleNotificationClick(NotificationResponse response) {
     if (response.actionId == 'CONFIRM_SAFE') {
       _handleUserConfirmedSafety();
-    } else if (response.payload == 'danger') {
-      _handleDangerNotificationTap();
     }
-  }
-
-  static void _handleDangerNotificationTap() {
-    RouterService.I.router.go(Routes.splash);
   }
 
   static Future<void> _handleUserConfirmedSafety() async {
@@ -96,17 +88,18 @@ class NotificationService {
     required int safetyLevel,
     required String summary,
   }) async {
-    const AndroidNotificationDetails androidDetails =
+    final AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
       'danger_check_channel',
       'Danger Check',
       channelDescription: 'Notifications about detected dangers',
       importance: Importance.max,
       priority: Priority.high,
-      styleInformation: BigTextStyleInformation(''),
+      fullScreenIntent: true,
+      styleInformation: BigTextStyleInformation(summary),
     );
 
-    const NotificationDetails platformDetails = NotificationDetails(
+    final NotificationDetails platformDetails = NotificationDetails(
       android: androidDetails,
     );
 

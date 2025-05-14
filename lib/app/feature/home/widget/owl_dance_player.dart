@@ -38,7 +38,7 @@ class _OwlDancePlayerState extends State<OwlDancePlayer> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: const Text(
-                  "⚠️ This can take more than a minute, please wait.",
+                  "Hoo hoo, I'm using Gemini to search!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF838383),
@@ -49,7 +49,7 @@ class _OwlDancePlayerState extends State<OwlDancePlayer> {
               ),
               const SizedBox(height: 8),
               SizedBox(
-                width: 190,
+                width: 200,
                 height: 120,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
