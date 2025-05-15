@@ -13,18 +13,27 @@ class NotificationService {
     final androidPlugin = _plugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
 
-    await androidPlugin
-        ?.createNotificationChannel(const AndroidNotificationChannel(
-      'fcm_local_channel',
-      'FCM with Button',
-      description: 'FCM remanagement message',
-      importance: Importance.max,
-    ));
+    if (androidPlugin != null) {
+      await androidPlugin.createNotificationChannel(
+        const AndroidNotificationChannel(
+          'fcm_local_channel',
+          'FCM with Button',
+          description: 'FCM remanagement message',
+          importance: Importance.max,
+        ),
+      );
+      await androidPlugin.createNotificationChannel(
+        const AndroidNotificationChannel(
+          'danger_check_channel',
+          'Danger Check',
+          description: 'Notifications about detected dangers',
+          importance: Importance.max,
+        ),
+      );
+    }
 
     if (androidPlugin != null) {
       await Permission.notification.request();
-    } else {
-      //
     }
   }
 

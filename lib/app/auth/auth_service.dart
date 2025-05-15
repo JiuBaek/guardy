@@ -8,6 +8,7 @@ import 'package:guardy/app/api/result.dart';
 import 'package:guardy/app/model/signup_request_model.dart';
 import 'package:guardy/app/routing/router_service.dart';
 import 'package:guardy/app/model/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   static AuthService get I => GetIt.I<AuthService>();
@@ -34,6 +35,9 @@ extension AuthServiceExtension on AuthService {
 
     return await result.fold(onSuccess: (loginResponse) async {
       await secureStorageService.saveTokens(loginResponse.token!);
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('access_token', loginResponse.token!);
 
       final notifier = container.read(authStateProvider.notifier);
       notifier.updateState((state) => state.copyWith(
@@ -83,11 +87,9 @@ extension AuthServiceExtension on AuthService {
                   emContactNumber: authResponse.emContactNumber,
                 ),
               ));
-          //print('자동 로그인 성공');
           return true;
         },
         onFailure: (error) async {
-          //print('자동 로그인 실패');
           await secureStorageService.clearTokens();
           return false;
         },
