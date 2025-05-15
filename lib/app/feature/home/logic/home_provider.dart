@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:guardy/app/feature/home/logic/home_state.dart';
 import 'package:guardy/app/model/home_model.dart';
 import 'package:guardy/app/api/api_service.dart';
@@ -21,28 +19,6 @@ class HomeProvider extends Notifier<HomeState> {
     final messaging = FirebaseMessaging.instance;
 
     await messaging.requestPermission(alert: true, badge: true, sound: true);
-  }
-
-  void updateRiskInfoFromPrefs(SharedPreferences prefs) {
-    final location = prefs.getString('risk_location');
-    final level = prefs.getString('risk_level');
-    final summary = prefs.getString('risk_summary');
-    final risksJson = prefs.getString('risk_risks');
-
-    if (location != null &&
-        level != null &&
-        summary != null &&
-        risksJson != null) {
-      final decoded = jsonDecode(risksJson) as List<dynamic>;
-      final risks = decoded.map((e) => HomeModel.fromJson(e)).toList();
-
-      state = state.copyWith(
-        location: location,
-        safetyLevel: level,
-        safetyDescription: summary,
-        risks: risks,
-      );
-    }
   }
 
   Future<void> fetchMode() async {
