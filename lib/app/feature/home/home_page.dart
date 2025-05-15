@@ -334,7 +334,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 height: 32,
               ),
               const SizedBox(
-                height: 24,
+                height: 48,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -354,7 +354,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                       state.safetyDescription!,
                       style:
                           const TextStyle(fontSize: 14, color: Colors.black87),
-                      textAlign: TextAlign.center,
                     ),
                   const SizedBox(height: 16),
                   GestureDetector(

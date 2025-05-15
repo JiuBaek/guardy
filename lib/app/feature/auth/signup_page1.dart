@@ -12,6 +12,25 @@ class SignUpPage1 extends StatefulWidget {
 class _SignUpPage1State extends State<SignUpPage1> {
   final _nicknameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isFilled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nicknameController.addListener(_checkFields);
+    _passwordController.addListener(_checkFields);
+  }
+
+  void _checkFields() {
+    final filled = _nicknameController.text.trim().isNotEmpty &&
+        _passwordController.text.trim().isNotEmpty;
+
+    if (filled != _isFilled) {
+      setState(() {
+        _isFilled = filled;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,17 +93,20 @@ class _SignUpPage1State extends State<SignUpPage1> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    RouterService.I.router.push(
-                      Routes.signup2,
-                      extra: {
-                        'nickname': _nicknameController.text.trim(),
-                        'password': _passwordController.text.trim(),
-                      },
-                    );
-                  },
+                  onPressed: _isFilled
+                      ? () {
+                          RouterService.I.router.push(
+                            Routes.signup2,
+                            extra: {
+                              'nickname': _nicknameController.text.trim(),
+                              'password': _passwordController.text.trim(),
+                            },
+                          );
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF838383),
+                      backgroundColor:
+                          _isFilled ? Colors.black : const Color(0xFF838383),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30))),
                   child: const Text(

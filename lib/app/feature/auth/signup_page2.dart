@@ -14,6 +14,7 @@ class SignUpPage2 extends StatefulWidget {
 class _SignUpPage2State extends State<SignUpPage2> {
   final _phoneController = TextEditingController();
   final _difficultiesController = TextEditingController();
+  bool _isFilled = false;
 
   final List<String> nationalities = [
     'Australia',
@@ -64,6 +65,29 @@ class _SignUpPage2State extends State<SignUpPage2> {
   String? selectedLanguage;
   String? selectedGender;
   String selectedCountryCode = '+82';
+
+  @override
+  void initState() {
+    super.initState();
+    _phoneController.addListener(_checkFields);
+    _difficultiesController.addListener(_checkFields);
+  }
+
+  void _checkFields() {
+    final phoneFilled = _phoneController.text.trim().isNotEmpty;
+    final dropdownsFilled = selectedNationality != null &&
+        selectedBirthYear != null &&
+        selectedLanguage != null &&
+        selectedGender != null;
+
+    final filled = phoneFilled && dropdownsFilled;
+
+    if (filled != _isFilled) {
+      setState(() {
+        _isFilled = filled;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,27 +210,30 @@ class _SignUpPage2State extends State<SignUpPage2> {
                   height: 45,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      RouterService.I.router.push(
-                        Routes.signup3,
-                        extra: {
-                          'nickname': nickname,
-                          'password': password,
-                          'phoneNumber':
-                              '$selectedCountryCode ${_phoneController.text.trim()}',
-                          'nationality': selectedNationality ?? '',
-                          'birthYear': selectedBirthYear ?? '',
-                          'language': selectedLanguage ?? '',
-                          'sex': selectedGender ?? '',
-                          'difficulties':
-                              _difficultiesController.text.trim().isEmpty
-                                  ? null
-                                  : _difficultiesController.text.trim(),
-                        },
-                      );
-                    },
+                    onPressed: _isFilled
+                        ? () {
+                            RouterService.I.router.push(
+                              Routes.signup3,
+                              extra: {
+                                'nickname': nickname,
+                                'password': password,
+                                'phoneNumber':
+                                    '$selectedCountryCode ${_phoneController.text.trim()}',
+                                'nationality': selectedNationality!,
+                                'birthYear': selectedBirthYear!,
+                                'language': selectedLanguage!,
+                                'sex': selectedGender!,
+                                'difficulties':
+                                    _difficultiesController.text.trim().isEmpty
+                                        ? null
+                                        : _difficultiesController.text.trim(),
+                              },
+                            );
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF838383),
+                        backgroundColor:
+                            _isFilled ? Colors.black : const Color(0xFF838383),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30))),
                     child: const Text('Next',

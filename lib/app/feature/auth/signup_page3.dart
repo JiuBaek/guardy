@@ -17,8 +17,27 @@ class SignUpPage3 extends StatefulWidget {
 class _SignUpPage3State extends State<SignUpPage3> {
   final _emergencyNameController = TextEditingController();
   final _emergencyNumberController = TextEditingController();
+  bool _isFilled = false;
 
   String selectedCountryCode = '+82';
+
+  @override
+  void initState() {
+    super.initState();
+    _emergencyNameController.addListener(_checkFields);
+    _emergencyNumberController.addListener(_checkFields);
+  }
+
+  void _checkFields() {
+    final filled = _emergencyNameController.text.trim().isNotEmpty &&
+        _emergencyNumberController.text.trim().isNotEmpty;
+
+    if (filled != _isFilled) {
+      setState(() {
+        _isFilled = filled;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,44 +103,46 @@ class _SignUpPage3State extends State<SignUpPage3> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () async {
-                    final emergencyPhoneNumber =
-                        '$selectedCountryCode ${_emergencyNumberController.text.trim()}';
-                    final fcmToken =
-                        await FirebaseMessaging.instance.getToken();
-                    if (fcmToken == null || fcmToken.isEmpty) {
-                      return;
-                    }
+                  onPressed: _isFilled
+                      ? () async {
+                          final emergencyPhoneNumber =
+                              '$selectedCountryCode ${_emergencyNumberController.text.trim()}';
+                          final fcmToken =
+                              await FirebaseMessaging.instance.getToken();
+                          if (fcmToken == null || fcmToken.isEmpty) return;
 
-                    final signupData = SignupRequestModel(
-                      nickname: args['nickname'],
-                      password: args['password'],
-                      phoneNumber: args['phoneNumber'],
-                      nationality: args['nationality'],
-                      birthYear: int.parse(args['birthYear']),
-                      language: args['language'],
-                      sex: args['sex'],
-                      difficulties: args['difficulties'],
-                      emContactName: _emergencyNameController.text.trim(),
-                      emContactNumber: emergencyPhoneNumber,
-                      fcmToken: fcmToken,
-                    );
-                    debugPrint('signupData: ${signupData.toJson()}');
+                          final signupData = SignupRequestModel(
+                            nickname: args['nickname'],
+                            password: args['password'],
+                            phoneNumber: args['phoneNumber'],
+                            nationality: args['nationality'],
+                            birthYear: int.parse(args['birthYear']),
+                            language: args['language'],
+                            sex: args['sex'],
+                            difficulties: args['difficulties'],
+                            emContactName: _emergencyNameController.text.trim(),
+                            emContactNumber: emergencyPhoneNumber,
+                            fcmToken: fcmToken,
+                          );
 
-                    final result = await AuthService.I.signUp(signupData);
-                    result.fold(
-                      onSuccess: (_) {
-                        //
-                      },
-                      onFailure: (error) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('sign up is failed')),
-                        );
-                      },
-                    );
-                  },
+                          final result = await AuthService.I.signUp(signupData);
+                          result.fold(
+                            onSuccess: (_) {
+                              //
+                            },
+                            onFailure: (error) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('sign up is failed')),
+                              );
+                            },
+                          );
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF005DD8),
+                      backgroundColor: _isFilled
+                          ? const Color(0xFF005DD8)
+                          : const Color(0xFF838383),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30))),
                   child: const Text('Create',
