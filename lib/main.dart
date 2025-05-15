@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'firebase_options.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,20 +24,23 @@ void main() async {
     () async {
       await Service.initFlutter();
 
+      await Service.initEnv();
+
       await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
+        options: FirebaseOptions(
+          apiKey: dotenv.env['FIREBASE_API_KEY']!,
+          appId: dotenv.env['FIREBASE_APP_ID']!,
+          messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+          projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+        ),
       );
 
       await NotificationService.init();
-
-      await Service.initEnv();
 
       debugPrint('2.5 - Flutter initialized');
 
       final serviceProviderContainer = Service.registerServices();
       debugPrint('3 - Services registered');
-
-      await NotificationService.init();
 
       Service.setupFirebaseMessagingHandlers();
       FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
