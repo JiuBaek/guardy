@@ -45,3 +45,20 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 .env
+
+# Android signing
+android/key.properties
+android/app/keystore.jks
+
+# Firebase (optional but recommended)
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+.firebase/flutter/firebase.json
+
+# VSCode settings (optional)
+.vscode/
+
+# Binary builds
+*.apk
+*.aab
+*.ipa

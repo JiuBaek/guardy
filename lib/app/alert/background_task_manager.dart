@@ -7,7 +7,7 @@ class BackgroundTaskManager {
   static Future<void> initialize() async {
     await Workmanager().initialize(
       callbackDispatcher,
-      isInDebugMode: true, // TODO: 개발 중에는 true, 출시할 땐 false로
+      isInDebugMode: false, // TODO: 개발 중에는 true, 출시할 땐 false로
     );
   }
 

@@ -3,7 +3,14 @@ allprojects {
         google()
         mavenCentral()
     }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'org.bouncycastle:bcprov-jdk15to18:1.70'
+        }
+    }
 }
+
 
 rootProject.buildDir = "../build"
 subprojects {
@@ -17,13 +24,6 @@ tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 buildscript {
     repositories {
         google()      
@@ -35,4 +35,5 @@ buildscript {
 
     }
 }
+
 

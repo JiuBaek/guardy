@@ -50,7 +50,7 @@ class _OwlDancePlayerState extends State<OwlDancePlayer> {
               const SizedBox(height: 8),
               SizedBox(
                 width: 200,
-                height: 120,
+                height: 110,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: VideoPlayer(_controller),
