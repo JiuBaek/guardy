@@ -253,9 +253,5 @@ class _SettingsEmergencyContactsState
     setState(() {
       isEditMode = false;
     });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Settings saved locally')),
-    );
   }
 }

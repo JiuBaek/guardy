@@ -343,9 +343,5 @@ class _SettingsPersonalState extends ConsumerState<SettingsPersonal> {
     setState(() {
       isEditMode = false;
     });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Settings saved locally')),
-    );
   }
 }

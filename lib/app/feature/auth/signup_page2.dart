@@ -106,14 +106,12 @@ class _SignUpPage2State extends State<SignUpPage2> {
           icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF838383)),
           onPressed: () => RouterService.I.router.pop(),
         ),
-        title: const Text(
-          'Guardy',
-          style: TextStyle(
-              color: Color(0xFF005DD8),
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
+        title: Image.asset(
+              'assets/images/guardyLogo.png',
+              width: 80,
+              height: 30,
+            )),
+      
       body: Padding(
           padding: const EdgeInsets.fromLTRB(24, 4, 24, 24),
           child: SingleChildScrollView(
