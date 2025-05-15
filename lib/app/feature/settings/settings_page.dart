@@ -64,7 +64,7 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
-  // 일반 설정 버튼 (Account Info, Personal Details 등)
+  // for accountInfo, personal, emergency
   Widget _buildSettingButton(
       BuildContext context, String text, VoidCallback onTap) {
     return SizedBox(

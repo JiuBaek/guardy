@@ -207,7 +207,7 @@ class _SettingsPersonalState extends ConsumerState<SettingsPersonal> {
               ),
               const SizedBox(height: 48),
 
-              // Edit/Save button
+              // Edit or Save button
               SizedBox(
                 height: 60,
                 child: ElevatedButton(

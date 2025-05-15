@@ -24,7 +24,7 @@ class Service {
     final secureStorageSerivce = GetIt.I.registerSingleton(
       SecureStorageService()..init(),
     );
-    //인증 관련
+    //auth
     GetIt.I.registerSingleton(AuthService(
       api: apiService,
       secureStorageService: secureStorageSerivce,
@@ -33,7 +33,7 @@ class Service {
 
     ApiService.I.setAuthService(AuthService.I);
 
-    // 앱 라우팅(페이지 이동) 담당
+    // routing
     GetIt.I.registerSingleton(RouterService()..init());
     return container;
   }

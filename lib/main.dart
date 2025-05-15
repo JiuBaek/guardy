@@ -18,7 +18,6 @@ import 'package:guardy/app/alert/background_task_manager.dart';
 part 'service.dart';
 
 void main() async {
-  //오류 감지
   runZonedGuarded<Future<void>>(
     () async {
       await Service.initFlutter();

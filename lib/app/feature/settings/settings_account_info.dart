@@ -156,10 +156,10 @@ class _SettingsAccountInfoState extends ConsumerState<SettingsAccountInfo> {
                         emContactNumber: user?.emContactNumber ?? '');
                     _saveAccountInfo();
                   } else {
-                    // Edit Mode 전환
+                    // Edit Mode switch
                     setState(() {
                       isEditMode = true;
-                      passwordController.text = ''; // 빈 패스워드로 초기화
+                      passwordController.text = '';
                     });
                   }
                 },
@@ -185,14 +185,13 @@ class _SettingsAccountInfoState extends ConsumerState<SettingsAccountInfo> {
     );
   }
 
-  //이건 저 dio_client에서
   void _saveAccountInfo() {
     setState(() {
       isEditMode = false;
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Settings saved locally')),
+      const SnackBar(content: Text('Settings is successfully saved')),
     );
   }
 }

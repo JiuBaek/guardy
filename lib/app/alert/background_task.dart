@@ -13,10 +13,9 @@ const String backgroundTaskName = "locationBackgroundTask";
 
 double? lastLatitude;
 double? lastLongitude;
-const double distanceThresholdInMeters = 10.0; //TODO: 1000.0으으로 고치기
+const double distanceThresholdInMeters = 1000.0;
 
 void callbackDispatcher() {
-  print('나 실행됨');
   Workmanager().executeTask((task, inputData) async {
     WidgetsFlutterBinding.ensureInitialized();
     try {
@@ -52,10 +51,9 @@ void callbackDispatcher() {
           currentLongitude,
         );
 
-        // if (distance < distanceThresholdInMeters) {
-        //   return Future.value(true);
-        // }
-        debugPrint('[BG] 거리 $distance m → 위험 요청 진행');
+        if (distance < distanceThresholdInMeters) {
+          return Future.value(true);
+        }
       }
 
       final result = await getCurrentRiskInfo(

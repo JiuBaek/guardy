@@ -134,7 +134,7 @@ class _SettingsEmergencyContactsState
 
             const SizedBox(height: 24),
 
-            // Emergency Number (국가번호 + 번호)
+            // Emergency Number
             const Text(
               'Emergency Number',
               style: TextStyle(
@@ -147,7 +147,7 @@ class _SettingsEmergencyContactsState
 
             const Spacer(),
 
-            // Edit / Save 버튼
+            // Edit or Save button
             SizedBox(
               height: 60,
               child: ElevatedButton(

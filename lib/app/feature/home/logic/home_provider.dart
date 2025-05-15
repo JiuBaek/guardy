@@ -112,11 +112,11 @@ class HomeProvider extends Notifier<HomeState> {
           );
         },
         onFailure: (e) {
-          //print('[SafetyCheck 실패] ${e.message}');
+          //print('[SafetyCheck fail] ${e.message}');
         },
       );
     } catch (e) {
-      //print('[위치 측정 실패] $e');
+      //print('[get location is failed] $e');
     }
     setLoading(false);
   }

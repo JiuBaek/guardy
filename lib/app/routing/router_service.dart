@@ -103,8 +103,7 @@ class RouterService {
         GoRoute(
             path: Routes.splash,
             builder: (context, state) => const SplashPage()),
-      ], //Todo: Add routes
-
+      ],
       errorBuilder: (context, state) {
         return const ErrorPage();
       },
